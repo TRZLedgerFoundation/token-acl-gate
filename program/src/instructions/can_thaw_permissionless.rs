@@ -92,17 +92,18 @@ impl<'a> TryFrom<&'a [AccountInfo]> for CanThawPermissionless<'a> {
 
     fn try_from(accounts: &'a [AccountInfo]) -> Result<Self, Self::Error> {
         /*
-        TX HOOK GETS CALLED WITH:
+        GATE PROGRAM GETS CALLED WITH:
          1- authority
          2- token account
          3- mint
          4- owner
-         5- extra account metas
-         6- (optional) source wallet block
-         7- (optional) destination wallet block
+         5- flag account
+         6- extra account metas
+         7- (optional) source wallet block
+         8- (optional) destination wallet block
          */
 
-        let [authority, token_account, mint, owner, extra_metas, remaining_accounts @ ..] =
+        let [authority, token_account, mint, owner, _flag_account, extra_metas, remaining_accounts @ ..] =
             accounts
         else {
             return Err(ABLError::NotEnoughAccounts);

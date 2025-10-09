@@ -1,5 +1,5 @@
 import { renderJavaScriptVisitor, renderRustVisitor } from '@codama/renderers';
-import { createFromRoot } from "codama"
+import { createFromRoot } from "codama";
 import path from "path";
 import fs from "fs";
 

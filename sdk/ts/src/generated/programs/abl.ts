@@ -21,7 +21,7 @@ import {
 } from '../instructions';
 
 export const ABL_PROGRAM_ADDRESS =
-  'ABL37q2e55mQ87KTRe6yF89TJoeysHKipwVwSRRPbTNY' as Address<'ABL37q2e55mQ87KTRe6yF89TJoeysHKipwVwSRRPbTNY'>;
+  'GATEzzqxhJnsWF6vHRsgtixxSB8PaQdcqGEVTEHWiULz' as Address<'GATEzzqxhJnsWF6vHRsgtixxSB8PaQdcqGEVTEHWiULz'>;
 
 export enum AblAccount {
   ListConfig,
@@ -76,7 +76,7 @@ export function identifyAblInstruction(
 }
 
 export type ParsedAblInstruction<
-  TProgram extends string = 'ABL37q2e55mQ87KTRe6yF89TJoeysHKipwVwSRRPbTNY',
+  TProgram extends string = 'GATEzzqxhJnsWF6vHRsgtixxSB8PaQdcqGEVTEHWiULz',
 > =
   | ({
       instructionType: AblInstruction.CreateList;

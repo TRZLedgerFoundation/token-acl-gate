@@ -18,7 +18,7 @@ pub use error::*;
 pub mod state;
 pub use state::*;
 
-declare_id!("ABL37q2e55mQ87KTRe6yF89TJoeysHKipwVwSRRPbTNY");
+declare_id!("GATEzzqxhJnsWF6vHRsgtixxSB8PaQdcqGEVTEHWiULz");
 
 #[inline(always)]
 fn process_instruction(

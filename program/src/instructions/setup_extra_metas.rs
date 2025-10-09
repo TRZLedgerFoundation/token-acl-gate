@@ -172,7 +172,7 @@ fn get_extra_metas(lists: &[Option<&Pubkey>]) -> ([ExtraAccountMeta; 10], usize)
                     bytes: WalletEntry::SEED_PREFIX.to_vec(),
                 },
                 Seed::AccountKey {
-                    index: index as u8 + 5,
+                    index: index as u8 + 6,
                 },
                 Seed::AccountData {
                     account_index: 1, // token account

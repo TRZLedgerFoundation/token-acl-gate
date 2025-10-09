@@ -8,4 +8,4 @@
 use solana_program::{pubkey, pubkey::Pubkey};
 
 /// `abl` program ID.
-pub const ABL_ID: Pubkey = pubkey!("ABL37q2e55mQ87KTRe6yF89TJoeysHKipwVwSRRPbTNY");
+pub const ABL_ID: Pubkey = pubkey!("GATEzzqxhJnsWF6vHRsgtixxSB8PaQdcqGEVTEHWiULz");
