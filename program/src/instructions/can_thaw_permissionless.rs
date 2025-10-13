@@ -30,6 +30,14 @@ impl<'a> CanThawPermissionless<'a> {
     pub const DISCRIMINATOR: u8 = 0x8;
 
     pub fn process(&self) -> ProgramResult {
+        // SAFETY: token account is validated by the token-2022 program
+        // after the current call finishes execution, the token acl program
+        // calls into token-2022 to thaw the token account, which gets type checked
+        // by the token-2022 program
+        if !crate::state::has_immutable_owner_extension(self.token_account) {
+            return Err(ABLError::ImmutableOwnerExtensionMissing.into());
+        }
+
         // remaining accounts should be pairs of list and ab_wallet
         let mut remaining_accounts = self.remaining_accounts.iter();
         while let Some(list) = remaining_accounts.next() {

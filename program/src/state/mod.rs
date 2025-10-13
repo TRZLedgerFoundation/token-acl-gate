@@ -1,6 +1,7 @@
 pub mod list_config;
 pub mod wallet_entry;
 pub use list_config::*;
+use pinocchio::account_info::AccountInfo;
 pub use wallet_entry::*;
 
 use crate::ABLError;
@@ -79,4 +80,46 @@ pub unsafe fn load_mut_unchecked<T: Transmutable>(bytes: &mut [u8]) -> Result<&m
         return Err(ABLError::InvalidAccountData);
     }
     Ok(&mut *(bytes.as_mut_ptr() as *mut T))
+}
+
+const IMMUTABLE_OWNER_EXTENSION_ID: u16 = 7;
+const TOKEN_ACCOUNT_LEN: usize = 165;
+const EXTENSION_START_PADDING: usize = 1;
+const EXTENSION_LEN_BYTES_LEN: usize = 2;
+const EXTENSION_TYPE_BYTES_LEN: usize = 2;
+const EXTENSION_HEADER_LEN: usize = EXTENSION_LEN_BYTES_LEN + EXTENSION_TYPE_BYTES_LEN;
+const EXTENSION_DATA_START_INDEX: usize = TOKEN_ACCOUNT_LEN + EXTENSION_START_PADDING;
+
+/// Checks if the token account has the immutable owner extension
+///
+/// # Safety
+///
+/// The caller must ensure that `token_account` is a valid token account.)
+#[inline(always)]
+pub fn has_immutable_owner_extension(token_account: &AccountInfo) -> bool {
+    let data = token_account.try_borrow_data();
+    if data.is_err() {
+        return false;
+    }
+    let data = data.unwrap();
+
+    if data.len() < EXTENSION_DATA_START_INDEX {
+        return false;
+    }
+
+    let extension_bytes = &data[EXTENSION_DATA_START_INDEX..];
+
+    let mut start = 0;
+    let end = extension_bytes.len();
+
+    while start < end {
+        let extension_type = u16::from_le_bytes(extension_bytes[start..start + EXTENSION_TYPE_BYTES_LEN].try_into().unwrap());
+        if extension_type == IMMUTABLE_OWNER_EXTENSION_ID {
+            return true;
+        }
+
+        let extension_len = u16::from_le_bytes(extension_bytes[start + EXTENSION_TYPE_BYTES_LEN..start + EXTENSION_HEADER_LEN].try_into().unwrap());
+        start += EXTENSION_HEADER_LEN + extension_len as usize;
+    }
+    false
 }
