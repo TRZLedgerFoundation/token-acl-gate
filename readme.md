@@ -4,7 +4,7 @@ A Solana program implementation of sRFC 37 that provides an Allow/Block List (AB
 
 ## Overview
 
-This ABL program is written in [Pinocchio](https://github.com/solana-labs/pinocchio) and generates clients using [Codama](https://github.com/codama-ai/codama). It provides a flexible token access control system that allows token issuers to manage which wallets can have their token accounts thawed through different operational modes.
+This ABL program is written in Pinocchio and generates clients using Codama. It provides a flexible token access control system that allows token issuers to manage which wallets can have their token accounts thawed through different operational modes.
 
 ## Repo contents
 
