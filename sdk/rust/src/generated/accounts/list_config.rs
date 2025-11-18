@@ -7,7 +7,7 @@
 
 use borsh::BorshDeserialize;
 use borsh::BorshSerialize;
-use solana_program::pubkey::Pubkey;
+use solana_pubkey::Pubkey;
 
 #[derive(BorshSerialize, BorshDeserialize, Clone, Debug, Eq, PartialEq)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
@@ -27,6 +27,8 @@ pub struct ListConfig {
     pub wallets_count: u64,
 }
 
+pub const LIST_CONFIG_DISCRIMINATOR: u8 = 1;
+
 impl ListConfig {
     pub const LEN: usize = 74;
 
@@ -43,8 +45,8 @@ impl ListConfig {
         authority: Pubkey,
         seed: Pubkey,
         bump: u8,
-    ) -> Result<solana_program::pubkey::Pubkey, solana_program::pubkey::PubkeyError> {
-        solana_program::pubkey::Pubkey::create_program_address(
+    ) -> Result<solana_pubkey::Pubkey, solana_pubkey::PubkeyError> {
+        solana_pubkey::Pubkey::create_program_address(
             &[
                 "list_config".as_bytes(),
                 authority.as_ref(),
@@ -55,8 +57,8 @@ impl ListConfig {
         )
     }
 
-    pub fn find_pda(authority: &Pubkey, seed: &Pubkey) -> (solana_program::pubkey::Pubkey, u8) {
-        solana_program::pubkey::Pubkey::find_program_address(
+    pub fn find_pda(authority: &Pubkey, seed: &Pubkey) -> (solana_pubkey::Pubkey, u8) {
+        solana_pubkey::Pubkey::find_program_address(
             &["list_config".as_bytes(), authority.as_ref(), seed.as_ref()],
             &crate::ABL_ID,
         )
@@ -69,12 +71,10 @@ impl ListConfig {
     }
 }
 
-impl<'a> TryFrom<&solana_program::account_info::AccountInfo<'a>> for ListConfig {
+impl<'a> TryFrom<&solana_account_info::AccountInfo<'a>> for ListConfig {
     type Error = std::io::Error;
 
-    fn try_from(
-        account_info: &solana_program::account_info::AccountInfo<'a>,
-    ) -> Result<Self, Self::Error> {
+    fn try_from(account_info: &solana_account_info::AccountInfo<'a>) -> Result<Self, Self::Error> {
         let mut data: &[u8] = &(*account_info.data).borrow();
         Self::deserialize(&mut data)
     }
@@ -83,7 +83,7 @@ impl<'a> TryFrom<&solana_program::account_info::AccountInfo<'a>> for ListConfig 
 #[cfg(feature = "fetch")]
 pub fn fetch_list_config(
     rpc: &solana_client::rpc_client::RpcClient,
-    address: &solana_program::pubkey::Pubkey,
+    address: &solana_pubkey::Pubkey,
 ) -> Result<crate::shared::DecodedAccount<ListConfig>, std::io::Error> {
     let accounts = fetch_all_list_config(rpc, &[*address])?;
     Ok(accounts[0].clone())
@@ -92,7 +92,7 @@ pub fn fetch_list_config(
 #[cfg(feature = "fetch")]
 pub fn fetch_all_list_config(
     rpc: &solana_client::rpc_client::RpcClient,
-    addresses: &[solana_program::pubkey::Pubkey],
+    addresses: &[solana_pubkey::Pubkey],
 ) -> Result<Vec<crate::shared::DecodedAccount<ListConfig>>, std::io::Error> {
     let accounts = rpc
         .get_multiple_accounts(addresses)
@@ -117,7 +117,7 @@ pub fn fetch_all_list_config(
 #[cfg(feature = "fetch")]
 pub fn fetch_maybe_list_config(
     rpc: &solana_client::rpc_client::RpcClient,
-    address: &solana_program::pubkey::Pubkey,
+    address: &solana_pubkey::Pubkey,
 ) -> Result<crate::shared::MaybeAccount<ListConfig>, std::io::Error> {
     let accounts = fetch_all_maybe_list_config(rpc, &[*address])?;
     Ok(accounts[0].clone())
@@ -126,7 +126,7 @@ pub fn fetch_maybe_list_config(
 #[cfg(feature = "fetch")]
 pub fn fetch_all_maybe_list_config(
     rpc: &solana_client::rpc_client::RpcClient,
-    addresses: &[solana_program::pubkey::Pubkey],
+    addresses: &[solana_pubkey::Pubkey],
 ) -> Result<Vec<crate::shared::MaybeAccount<ListConfig>>, std::io::Error> {
     let accounts = rpc
         .get_multiple_accounts(addresses)
@@ -172,5 +172,5 @@ impl anchor_lang::IdlBuild for ListConfig {}
 
 #[cfg(feature = "anchor-idl-build")]
 impl anchor_lang::Discriminator for ListConfig {
-    const DISCRIMINATOR: [u8; 8] = [0; 8];
+    const DISCRIMINATOR: &[u8] = &[0; 8];
 }

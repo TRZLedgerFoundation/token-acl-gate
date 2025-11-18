@@ -7,7 +7,7 @@
 
 use borsh::BorshDeserialize;
 use borsh::BorshSerialize;
-use solana_program::pubkey::Pubkey;
+use solana_pubkey::Pubkey;
 
 #[derive(BorshSerialize, BorshDeserialize, Clone, Debug, Eq, PartialEq)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
@@ -25,6 +25,8 @@ pub struct WalletEntry {
     pub list_config: Pubkey,
 }
 
+pub const WALLET_ENTRY_DISCRIMINATOR: u8 = 2;
+
 impl WalletEntry {
     pub const LEN: usize = 65;
 
@@ -41,8 +43,8 @@ impl WalletEntry {
         list_config: Pubkey,
         wallet_address: Pubkey,
         bump: u8,
-    ) -> Result<solana_program::pubkey::Pubkey, solana_program::pubkey::PubkeyError> {
-        solana_program::pubkey::Pubkey::create_program_address(
+    ) -> Result<solana_pubkey::Pubkey, solana_pubkey::PubkeyError> {
+        solana_pubkey::Pubkey::create_program_address(
             &[
                 "wallet_entry".as_bytes(),
                 list_config.as_ref(),
@@ -53,11 +55,8 @@ impl WalletEntry {
         )
     }
 
-    pub fn find_pda(
-        list_config: &Pubkey,
-        wallet_address: &Pubkey,
-    ) -> (solana_program::pubkey::Pubkey, u8) {
-        solana_program::pubkey::Pubkey::find_program_address(
+    pub fn find_pda(list_config: &Pubkey, wallet_address: &Pubkey) -> (solana_pubkey::Pubkey, u8) {
+        solana_pubkey::Pubkey::find_program_address(
             &[
                 "wallet_entry".as_bytes(),
                 list_config.as_ref(),
@@ -74,12 +73,10 @@ impl WalletEntry {
     }
 }
 
-impl<'a> TryFrom<&solana_program::account_info::AccountInfo<'a>> for WalletEntry {
+impl<'a> TryFrom<&solana_account_info::AccountInfo<'a>> for WalletEntry {
     type Error = std::io::Error;
 
-    fn try_from(
-        account_info: &solana_program::account_info::AccountInfo<'a>,
-    ) -> Result<Self, Self::Error> {
+    fn try_from(account_info: &solana_account_info::AccountInfo<'a>) -> Result<Self, Self::Error> {
         let mut data: &[u8] = &(*account_info.data).borrow();
         Self::deserialize(&mut data)
     }
@@ -88,7 +85,7 @@ impl<'a> TryFrom<&solana_program::account_info::AccountInfo<'a>> for WalletEntry
 #[cfg(feature = "fetch")]
 pub fn fetch_wallet_entry(
     rpc: &solana_client::rpc_client::RpcClient,
-    address: &solana_program::pubkey::Pubkey,
+    address: &solana_pubkey::Pubkey,
 ) -> Result<crate::shared::DecodedAccount<WalletEntry>, std::io::Error> {
     let accounts = fetch_all_wallet_entry(rpc, &[*address])?;
     Ok(accounts[0].clone())
@@ -97,7 +94,7 @@ pub fn fetch_wallet_entry(
 #[cfg(feature = "fetch")]
 pub fn fetch_all_wallet_entry(
     rpc: &solana_client::rpc_client::RpcClient,
-    addresses: &[solana_program::pubkey::Pubkey],
+    addresses: &[solana_pubkey::Pubkey],
 ) -> Result<Vec<crate::shared::DecodedAccount<WalletEntry>>, std::io::Error> {
     let accounts = rpc
         .get_multiple_accounts(addresses)
@@ -122,7 +119,7 @@ pub fn fetch_all_wallet_entry(
 #[cfg(feature = "fetch")]
 pub fn fetch_maybe_wallet_entry(
     rpc: &solana_client::rpc_client::RpcClient,
-    address: &solana_program::pubkey::Pubkey,
+    address: &solana_pubkey::Pubkey,
 ) -> Result<crate::shared::MaybeAccount<WalletEntry>, std::io::Error> {
     let accounts = fetch_all_maybe_wallet_entry(rpc, &[*address])?;
     Ok(accounts[0].clone())
@@ -131,7 +128,7 @@ pub fn fetch_maybe_wallet_entry(
 #[cfg(feature = "fetch")]
 pub fn fetch_all_maybe_wallet_entry(
     rpc: &solana_client::rpc_client::RpcClient,
-    addresses: &[solana_program::pubkey::Pubkey],
+    addresses: &[solana_pubkey::Pubkey],
 ) -> Result<Vec<crate::shared::MaybeAccount<WalletEntry>>, std::io::Error> {
     let accounts = rpc
         .get_multiple_accounts(addresses)
@@ -177,5 +174,5 @@ impl anchor_lang::IdlBuild for WalletEntry {}
 
 #[cfg(feature = "anchor-idl-build")]
 impl anchor_lang::Discriminator for WalletEntry {
-    const DISCRIMINATOR: [u8; 8] = [0; 8];
+    const DISCRIMINATOR: &[u8] = &[0; 8];
 }
