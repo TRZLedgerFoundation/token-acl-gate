@@ -5,7 +5,7 @@
 //! <https://github.com/codama-idl/codama>
 //!
 
-use solana_program::{pubkey, pubkey::Pubkey};
+use solana_pubkey::{pubkey, Pubkey};
 
 /// `abl` program ID.
 pub const ABL_ID: Pubkey = pubkey!("GATEzzqxhJnsWF6vHRsgtixxSB8PaQdcqGEVTEHWiULz");
