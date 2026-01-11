@@ -4,7 +4,7 @@ use trezoa_keypair::Keypair;
 use trezoa_sdk::{
     program_option::COption, program_pack::Pack, signer::Signer, transaction::Transaction,
 };
-use spl_associated_token_account_client::{
+use tpl_associated_token_account_client::{
     address::get_associated_token_address_with_program_id,
     instruction::create_associated_token_account,
 };

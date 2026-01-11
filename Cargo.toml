@@ -21,14 +21,14 @@ trezoa-program-test = "2.2.1"
 trezoa-program-entrypoint = "2.2.1"
 trezoa-program-runtime = "2.2.1"
 trezoa-program-pack = "2.2.1"
-spl-discriminator = "0.4.0"
-spl-program-error = "0.7.0"
-spl-tlv-account-resolution = "0.10.0"
-spl-type-length-value = "0.8.0"
-spl-pod = "0.5.1"
+tpl-discriminator = "0.4.0"
+tpl-program-error = "0.7.0"
+tpl-tlv-account-resolution = "0.10.0"
+tpl-type-length-value = "0.8.0"
+tpl-pod = "0.5.1"
 tpl-token-2022 = { version = "9.0.0", features = ["no-entrypoint"] }
 trezoa-sdk = "2.2.1"
-spl-associated-token-account-client = "2.0.0"
+tpl-associated-token-account-client = "2.0.0"
 token-acl-interface = { git = "https://github.com/tiago18c/token-acl", rev = "6ab46bc" }
 token-acl-client = { git = "https://github.com/tiago18c/token-acl", rev = "6ab46bc" }
 token-acl = { git = "https://github.com/tiago18c/token-acl", rev = "6ab46bc", features = [

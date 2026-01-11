@@ -7,7 +7,7 @@ use pinocchio_pubkey::declare_id;
 
 program_entrypoint!(process_instruction);
 
-// need allocator due to dependency on spl_tlv_account_resolution
+// need allocator due to dependency on tpl_tlv_account_resolution
 //no_allocator!();
 default_allocator!();
 

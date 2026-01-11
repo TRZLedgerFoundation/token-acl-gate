@@ -1,7 +1,7 @@
 use pinocchio::{
     account_info::AccountInfo, instruction::Signer, pubkey::{find_program_address, Pubkey}, seeds, syscalls::sol_memset_, sysvars::{rent::Rent, Sysvar}, ProgramResult
 };
-use spl_tlv_account_resolution::{
+use tpl_tlv_account_resolution::{
     account::ExtraAccountMeta, seeds::Seed, trezoa_pubkey::Pubkey as TrezoaPubkey,
     state::ExtraAccountMetaList,
 };
