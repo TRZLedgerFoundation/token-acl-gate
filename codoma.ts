@@ -1,6 +1,6 @@
-import { renderVisitor as renderJavaScriptVisitor } from '@codama/renderers-js';
-import { renderVisitor as renderRustVisitor } from '@codama/renderers-rust';
-import { createFromRoot } from "codama";
+import { renderVisitor as renderJavaScriptVisitor } from '@codoma/renderers-js';
+import { renderVisitor as renderRustVisitor } from '@codoma/renderers-rust';
+import { createFromRoot } from "codoma";
 import path from "path";
 import fs from "fs";
 
@@ -12,7 +12,7 @@ const typescriptClientsDir = path.join(
   "ts",
 );
 
-const codama = createFromRoot(
+const codoma = createFromRoot(
   require(path.join(__dirname, 'program', 'idl.json'))
 );
 
@@ -45,5 +45,5 @@ function preserveConfigFiles() {
 
 const configPreserver = preserveConfigFiles();
 
-codama.accept(renderJavaScriptVisitor('sdk/ts/src/generated', { formatCode: true }));
-codama.accept(renderRustVisitor('sdk/rust/src/generated', { crateFolder: 'sdk/rust/', formatCode: true }));
+codoma.accept(renderJavaScriptVisitor('sdk/ts/src/generated', { formatCode: true }));
+codoma.accept(renderRustVisitor('sdk/rust/src/generated', { crateFolder: 'sdk/rust/', formatCode: true }));

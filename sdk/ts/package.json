@@ -26,7 +26,7 @@
       "clean": "rm -rf dist"
     },
     "dependencies": {
-      "@solana/kit": "^5.0.0"
+      "@trezoa/kit": "^5.0.0"
     },
     "devDependencies": {
       "@types/jest": "^29.5.0",
@@ -44,7 +44,7 @@
       "registry": "https://registry.npmjs.org"
     },
     "keywords": [
-      "solana",
+      "trezoa",
       "token-2022",
       "extensions",
       "core",

@@ -1,6 +1,6 @@
 use {
     clap::{crate_description, crate_name, crate_version, Arg, Command},
-    solana_clap_v3_utils::{
+    trezoa_clap_v3_utils::{
         input_parsers::{
             parse_url_or_moniker,
             signer::{SignerSource, SignerSourceParserBuilder},
@@ -8,9 +8,9 @@ use {
         input_validators::normalize_to_url_if_moniker,
         keypair::signer_from_path,
     },
-    solana_client::nonblocking::rpc_client::RpcClient,
-    solana_remote_wallet::remote_wallet::RemoteWalletManager,
-    solana_sdk::{
+    trezoa_client::nonblocking::rpc_client::RpcClient,
+    trezoa_remote_wallet::remote_wallet::RemoteWalletManager,
+    trezoa_sdk::{
         commitment_config::CommitmentConfig,
         instruction::AccountMeta,
         message::Message,
@@ -222,7 +222,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
                 .takes_value(true)
                 .global(true)
                 .help("Configuration file to use");
-            if let Some(ref config_file) = *solana_cli_config::CONFIG_FILE {
+            if let Some(ref config_file) = *trezoa_cli_config::CONFIG_FILE {
                 arg.default_value(config_file)
             } else {
                 arg
@@ -350,9 +350,9 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
     let config = {
         let cli_config = if let Some(config_file) = matches.try_get_one::<String>("config_file")? {
-            solana_cli_config::Config::load(config_file).unwrap_or_default()
+            trezoa_cli_config::Config::load(config_file).unwrap_or_default()
         } else {
-            solana_cli_config::Config::default()
+            trezoa_cli_config::Config::default()
         };
 
         let payer = if let Ok(Some((signer, _))) =
@@ -381,7 +381,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
             verbose: matches.try_contains_id("verbose")?,
         }
     };
-    solana_logger::setup_with_default("solana=info");
+    trezoa_logger::setup_with_default("trezoa=info");
 
     if config.verbose {
         println!("JSON RPC URL: {}", config.json_rpc_url);

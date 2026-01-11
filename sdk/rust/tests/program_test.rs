@@ -1,18 +1,18 @@
 use allow_block_list_client::types::Mode;
 use litesvm::types::TransactionResult;
 use litesvm::LiteSVM;
-use solana_instruction::{AccountMeta, Instruction};
-use solana_pubkey::Pubkey;
-use solana_sdk::transaction::Transaction;
-use solana_sdk::{signature::Keypair, signer::Signer};
-use solana_system_interface::instruction::create_account;
-use solana_system_interface::program::ID;
+use trezoa_instruction::{AccountMeta, Instruction};
+use trezoa_pubkey::Pubkey;
+use trezoa_sdk::transaction::Transaction;
+use trezoa_sdk::{signature::Keypair, signer::Signer};
+use trezoa_system_interface::instruction::create_account;
+use trezoa_system_interface::program::ID;
 use spl_associated_token_account_client::address::get_associated_token_address_with_program_id;
 use spl_associated_token_account_client::instruction::create_associated_token_account;
-use spl_token_2022::extension::default_account_state::instruction::initialize_default_account_state;
-use spl_token_2022::extension::ExtensionType;
-use spl_token_2022::instruction::initialize_mint2;
-use spl_token_2022::state::{AccountState, Mint};
+use tpl_token_2022::extension::default_account_state::instruction::initialize_default_account_state;
+use tpl_token_2022::extension::ExtensionType;
+use tpl_token_2022::instruction::initialize_mint2;
+use tpl_token_2022::state::{AccountState, Mint};
 
 pub struct TestContext {
     pub vm: LiteSVM,
@@ -72,7 +72,7 @@ impl TestContext {
                 .unwrap();
         let mint_kp = Keypair::new();
         let mint_pk = mint_kp.pubkey();
-        let token_program_id = &spl_token_2022::ID;
+        let token_program_id = &tpl_token_2022::ID;
         let payer_pk = auth.pubkey();
 
         let ix1 = create_account(
@@ -119,7 +119,7 @@ impl TestContext {
         payer: &Keypair,
         airdrop: bool,
     ) -> Pubkey {
-        let token_program_id = &spl_token_2022::ID;
+        let token_program_id = &tpl_token_2022::ID;
         let payer_pk = payer.pubkey();
 
         if airdrop {
@@ -261,7 +261,7 @@ impl TestContext {
             token_account,
             &self.token.mint,
             &mint_cfg_pk,
-            &spl_token_2022::ID,
+            &tpl_token_2022::ID,
             owner,
             false,
             |pubkey| {
@@ -306,7 +306,7 @@ impl TestContext {
             .mint_config(mint_cfg_pk)
             .payer(self.token.auth.pubkey())
             .system_program(ID)
-            .token_program(spl_token_2022::ID)
+            .token_program(tpl_token_2022::ID)
             .instruction();
 
         let ix2 = token_acl_client::instructions::TogglePermissionlessInstructionsBuilder::new()

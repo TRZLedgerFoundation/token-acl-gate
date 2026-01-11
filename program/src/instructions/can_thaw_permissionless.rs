@@ -2,7 +2,7 @@ use pinocchio::{account_info::AccountInfo, ProgramResult};
 
 use crate::{load, ABLError, ListConfig, WalletEntry};
 
-use solana_curve25519::edwards::PodEdwardsPoint;
+use trezoa_curve25519::edwards::PodEdwardsPoint;
 
 ///
 /// SECURITY ASSUMPTIONS OVER TX-HOOK
@@ -72,7 +72,7 @@ impl<'a> CanThawPermissionless<'a> {
             crate::Mode::AllowAllEoas => {
                 let pt = PodEdwardsPoint(owner.key().clone());
 
-                if !solana_curve25519::edwards::validate_edwards(&pt) {
+                if !trezoa_curve25519::edwards::validate_edwards(&pt) {
                     let ab_wallet_data: &[u8] = &wallet_entry.try_borrow_data()?;
                     let _ = unsafe {
                         load::<WalletEntry>(ab_wallet_data).map_err(|_| ABLError::AccountBlocked)?

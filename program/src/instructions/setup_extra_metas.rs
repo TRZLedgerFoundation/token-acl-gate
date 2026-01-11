@@ -2,7 +2,7 @@ use pinocchio::{
     account_info::AccountInfo, instruction::Signer, pubkey::{find_program_address, Pubkey}, seeds, syscalls::sol_memset_, sysvars::{rent::Rent, Sysvar}, ProgramResult
 };
 use spl_tlv_account_resolution::{
-    account::ExtraAccountMeta, seeds::Seed, solana_pubkey::Pubkey as SolanaPubkey,
+    account::ExtraAccountMeta, seeds::Seed, trezoa_pubkey::Pubkey as TrezoaPubkey,
     state::ExtraAccountMetaList,
 };
 
@@ -161,7 +161,7 @@ fn get_extra_metas(lists: &[Option<&Pubkey>]) -> ([ExtraAccountMeta; 10], usize)
     let mut index: usize = 0;
     for list in lists {
         metas[index] = ExtraAccountMeta::new_with_pubkey(
-            &SolanaPubkey::new_from_array(*list.unwrap()),
+            &TrezoaPubkey::new_from_array(*list.unwrap()),
             false,
             false,
         )

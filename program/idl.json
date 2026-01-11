@@ -1,6 +1,6 @@
 {
     "kind": "rootNode",
-    "standard": "codama",
+    "standard": "codoma",
     "version": "1.0.0",
     "program": {
       "kind": "programNode",

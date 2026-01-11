@@ -1,14 +1,14 @@
 pub mod program_test;
 use allow_block_list_client::types::Mode;
-use solana_keypair::Keypair;
-use solana_sdk::{
+use trezoa_keypair::Keypair;
+use trezoa_sdk::{
     program_option::COption, program_pack::Pack, signer::Signer, transaction::Transaction,
 };
 use spl_associated_token_account_client::{
     address::get_associated_token_address_with_program_id,
     instruction::create_associated_token_account,
 };
-use spl_token_2022::state::{Account, AccountState};
+use tpl_token_2022::state::{Account, AccountState};
 
 use crate::program_test::TestContext;
 
@@ -52,7 +52,7 @@ async fn thaws_eoa_wallet() {
     let list_config = context.create_list(Mode::AllowAllEoas);
     let _ = context.setup_extra_metas(&[list_config]);
 
-    let wallet = solana_keypair::Keypair::new();
+    let wallet = trezoa_keypair::Keypair::new();
     let ta = context.create_token_account(&wallet);
 
     let res = context.thaw_permissionless(&wallet.pubkey(), &ta).await;
@@ -78,14 +78,14 @@ async fn thaws_eoa_wallet_on_ata_creation() {
     let token_account = get_associated_token_address_with_program_id(
         &user_pubkey,
         &context.token.mint,
-        &spl_token_2022::ID,
+        &tpl_token_2022::ID,
     );
 
     let ix = create_associated_token_account(
         &user_pubkey,
         &user_pubkey,
         &context.token.mint,
-        &spl_token_2022::ID,
+        &tpl_token_2022::ID,
     );
     instructions.push(ix);
 
@@ -109,7 +109,7 @@ async fn thaws_eoa_wallet_on_ata_creation() {
         &token_account,
         &context.token.mint,
         &mint_cfg_pk,
-        &spl_token_2022::ID,
+        &tpl_token_2022::ID,
         &user_pubkey,
         false,
         |pubkey| {

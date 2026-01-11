@@ -1,15 +1,15 @@
 # Allow Block List (ABL) - sRFC 37 Implementation
 
-A Solana program implementation of sRFC 37 that provides an Allow/Block List (ABL) system for token access control. This program implements the `can_thaw_permissionless` instruction according to the sRFC037 specification.
+A Trezoa program implementation of sRFC 37 that provides an Allow/Block List (ABL) system for token access control. This program implements the `can_thaw_permissionless` instruction according to the sRFC037 specification.
 
 ## Overview
 
-This ABL program is written in Pinocchio and generates clients using Codama. It provides a flexible token access control system that allows token issuers to manage which wallets can have their token accounts thawed through different operational modes.
+This ABL program is written in Pinocchio and generates clients using Codoma. It provides a flexible token access control system that allows token issuers to manage which wallets can have their token accounts thawed through different operational modes.
 
 ## Repo contents
 
-- **Program**: Core Solana program written in Pinocchio
-- **SDK**: Generated TypeScript and Rust clients using Codama
+- **Program**: Core Trezoa program written in Pinocchio
+- **SDK**: Generated TypeScript and Rust clients using Codoma
 - **CLI**: Command-line interface for program interaction
 
 ## Working Modes
@@ -59,7 +59,7 @@ The program supports three distinct operational modes:
 
 ## Integration with Token ACL
 
-This program serves as a gate program for the [Token ACL system](https://github.com/solana-foundation/token-acl). The Token ACL program calls `can_thaw_permissionless` to determine if a wallet should be allowed to thaw their token account.
+This program serves as a gate program for the [Token ACL system](https://github.com/trzledgerfoundation/token-acl). The Token ACL program calls `can_thaw_permissionless` to determine if a wallet should be allowed to thaw their token account.
 
 ### Setup Process
 1. Create one or more lists with desired modes
@@ -73,7 +73,7 @@ This program serves as a gate program for the [Token ACL system](https://github.
 
 ### Prerequisites
 - Rust 1.70+
-- Solana CLI 2.2.0+
+- Trezoa CLI 2.2.0+
 - Node.js 20.18.0+
 - pnpm 9.1.0+
 
@@ -99,10 +99,10 @@ GATEzzqxhJnsWF6vHRsgtixxSB8PaQdcqGEVTEHWiULz
 
 ## References
 
-- [Token ACL Repository](https://github.com/solana-foundation/token-acl)
-- [sRFC 37 Specification](https://github.com/solana-foundation/SRFCs/discussions/2)
-- [Pinocchio Framework](https://github.com/solana-labs/pinocchio)
-- [Codama Code Generation](https://github.com/codama-ai/codama)
+- [Token ACL Repository](https://github.com/trzledgerfoundation/token-acl)
+- [sRFC 37 Specification](https://github.com/trzledgerfoundation/SRFCs/discussions/2)
+- [Pinocchio Framework](https://github.com/trezoa-labs/pinocchio)
+- [Codoma Code Generation](https://github.com/codoma-ai/codoma)
 
 ## License
 

@@ -20,4 +20,4 @@ token-acl-interface = { workspace = true }
 token-acl = { workspace = true, features = [
     "no-entrypoint",
 ] }
-solana-curve25519 = "2.2.1"
+trezoa-curve25519 = "2.2.1"

@@ -3,9 +3,9 @@ use allow_block_list_client::{
     accounts::{ListConfig, WalletEntry},
     types::Mode,
 };
-use solana_instruction::AccountMeta;
-use solana_pubkey::Pubkey;
-use solana_sdk::{signer::Signer, transaction::Transaction};
+use trezoa_instruction::AccountMeta;
+use trezoa_pubkey::Pubkey;
+use trezoa_sdk::{signer::Signer, transaction::Transaction};
 
 use crate::program_test::TestContext;
 
@@ -196,7 +196,7 @@ async fn setup_list_extra_metas() {
     let res = context.vm.send_transaction(tx);
     assert!(res.is_ok());
 
-    let wallet = solana_keypair::Keypair::new();
+    let wallet = trezoa_keypair::Keypair::new();
     let user_pubkey = wallet.pubkey();
     let (wallet_entry, _) = allow_block_list_client::accounts::WalletEntry::find_pda(
         &list_config_address,
@@ -209,7 +209,7 @@ async fn setup_list_extra_metas() {
         &ta,
         &context.token.mint,
         &mint_config,
-        &spl_token_2022::ID,
+        &tpl_token_2022::ID,
         &user_pubkey,
         false,
         |pubkey| {
@@ -270,7 +270,7 @@ async fn setup_list_extra_metas_with_multiple_lists() {
     let res = context.vm.send_transaction(tx);
     assert!(res.is_ok());
 
-    let wallet = solana_keypair::Keypair::new();
+    let wallet = trezoa_keypair::Keypair::new();
     let user_pubkey = wallet.pubkey();
     let (wallet_entry, _) = allow_block_list_client::accounts::WalletEntry::find_pda(
         &list_config_address,
@@ -291,7 +291,7 @@ async fn setup_list_extra_metas_with_multiple_lists() {
         &ta,
         &context.token.mint,
         &mint_config,
-        &spl_token_2022::ID,
+        &tpl_token_2022::ID,
         &user_pubkey,
         false,
         |pubkey| {
