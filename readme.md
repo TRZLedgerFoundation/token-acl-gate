@@ -101,8 +101,8 @@ GATEzzqxhJnsWF6vHRsgtixxSB8PaQdcqGEVTEHWiULz
 
 - [Token ACL Repository](https://github.com/trzledgerfoundation/token-acl)
 - [sRFC 37 Specification](https://github.com/trzledgerfoundation/SRFCs/discussions/2)
-- [Pinocchio Framework](https://github.com/trezoa-labs/pinocchio)
-- [Codoma Code Generation](https://github.com/codoma-ai/codoma)
+- [Pinocchio Framework](https://github.com/trezoa-team/pinocchio)
+- [Codoma Code Generation](https://github.com/trzledgerfoundation-ai/codoma)
 
 ## License
 

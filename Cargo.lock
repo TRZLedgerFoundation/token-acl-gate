@@ -435,7 +435,7 @@ dependencies = [
  "flate2",
  "futures-core",
  "memchr",
- "pin-project-lite",
+ "pin-trezoa-lite",
  "tokio",
 ]
 
@@ -447,7 +447,7 @@ checksum = "ff6e472cdea888a4bd64f342f09b3f50e1886d32afe8df3d663c01140b811b18"
 dependencies = [
  "event-listener 5.4.0",
  "event-listener-strategy",
- "pin-project-lite",
+ "pin-trezoa-lite",
 ]
 
 [[package]]
@@ -1452,7 +1452,7 @@ checksum = "3492acde4c3fc54c845eaab3eed8bd00c7a7d881f78bfc801e43a93dec1331ae"
 dependencies = [
  "concurrent-queue",
  "parking",
- "pin-project-lite",
+ "pin-trezoa-lite",
 ]
 
 [[package]]
@@ -1462,7 +1462,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8be9f3dfaaffdae2972880079a491a1a8bb7cbed0b8dd7a347f668b4150a3b93"
 dependencies = [
  "event-listener 5.4.0",
- "pin-project-lite",
+ "pin-trezoa-lite",
 ]
 
 [[package]]
@@ -1667,7 +1667,7 @@ dependencies = [
  "futures-sink",
  "futures-task",
  "memchr",
- "pin-project-lite",
+ "pin-trezoa-lite",
  "pin-utils",
  "slab",
 ]
@@ -1902,7 +1902,7 @@ checksum = "7ceab25649e9960c0311ea418d17bee82c0dcec1bd053b5f9a66e265a693bed2"
 dependencies = [
  "bytes",
  "http",
- "pin-project-lite",
+ "pin-trezoa-lite",
 ]
 
 [[package]]
@@ -1939,7 +1939,7 @@ dependencies = [
  "httparse",
  "httpdate",
  "itoa",
- "pin-project-lite",
+ "pin-trezoa-lite",
  "socket2",
  "tokio",
  "tower-service",
@@ -2889,7 +2889,7 @@ dependencies = [
  "js-sys",
  "lazy_static",
  "percent-encoding",
- "pin-project",
+ "pin-trezoa",
  "rand 0.8.5",
  "thiserror 1.0.69",
 ]
@@ -2978,16 +2978,16 @@ dependencies = [
 ]
 
 [[package]]
-name = "pin-project"
+name = "pin-trezoa"
 version = "1.1.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "677f1add503faace112b9f1373e43e9e054bfdd22ff1a63c1bc485eaec6a6a8a"
 dependencies = [
- "pin-project-internal",
+ "pin-trezoa-internal",
 ]
 
 [[package]]
-name = "pin-project-internal"
+name = "pin-trezoa-internal"
 version = "1.1.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6e918e4ff8c4549eb882f14b3a4bc8c8bc93de829416eacf579f1207a8fbf861"
@@ -2998,7 +2998,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "pin-project-lite"
+name = "pin-trezoa-lite"
 version = "0.2.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3b3cff922bd51709b605d9ead9aa71031d81447142d828eb4a6eba76fe619f9b"
@@ -3231,7 +3231,7 @@ checksum = "626214629cda6781b6dc1d316ba307189c85ba657213ce642d9c77670f8202c8"
 dependencies = [
  "bytes",
  "cfg_aliases",
- "pin-project-lite",
+ "pin-trezoa-lite",
  "quinn-proto",
  "quinn-udp",
  "rustc-hash 2.1.1",
@@ -3506,7 +3506,7 @@ dependencies = [
  "mime_guess",
  "once_cell",
  "percent-encoding",
- "pin-project-lite",
+ "pin-trezoa-lite",
  "rustls 0.21.12",
  "rustls-pemfile",
  "serde",
@@ -4175,7 +4175,7 @@ dependencies = [
  "trezoa-bucket-map",
  "trezoa-clock",
  "trezoa-hash",
- "trezoa-inline-spl",
+ "trezoa-inline-tpl",
  "trezoa-lattice-hash",
  "trezoa-measure",
  "trezoa-metrics",
@@ -5091,7 +5091,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "trezoa-inline-spl"
+name = "trezoa-inline-tpl"
 version = "2.2.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ed78e6709851bb3fa8a0acb1ee40fbffa888049d042ca132d6ccb8e0b313ac72"
@@ -5714,7 +5714,7 @@ dependencies = [
  "trezoa-bpf-loader-program",
  "trezoa-compute-budget",
  "trezoa-feature-set",
- "trezoa-inline-spl",
+ "trezoa-inline-tpl",
  "trezoa-instruction",
  "trezoa-log-collector",
  "trezoa-logger",
@@ -5980,7 +5980,7 @@ dependencies = [
  "trezoa-commitment-config",
  "trezoa-fee-calculator",
  "trezoa-inflation",
- "trezoa-inline-spl",
+ "trezoa-inline-tpl",
  "trezoa-pubkey",
  "trezoa-signer",
  "trezoa-transaction-error",
@@ -6059,7 +6059,7 @@ dependencies = [
  "trezoa-cost-model",
  "trezoa-feature-set",
  "trezoa-fee",
- "trezoa-inline-spl",
+ "trezoa-inline-tpl",
  "trezoa-lattice-hash",
  "trezoa-measure",
  "trezoa-metrics",
@@ -8114,7 +8114,7 @@ dependencies = [
  "futures",
  "humantime",
  "opentelemetry",
- "pin-project",
+ "pin-trezoa",
  "rand 0.8.5",
  "serde",
  "static_assertions",
@@ -8401,7 +8401,7 @@ dependencies = [
  "libc",
  "mio",
  "parking_lot",
- "pin-project-lite",
+ "pin-trezoa-lite",
  "signal-hook-registry",
  "socket2",
  "tokio-macros",
@@ -8440,7 +8440,7 @@ dependencies = [
  "educe",
  "futures-core",
  "futures-sink",
- "pin-project",
+ "pin-trezoa",
  "serde",
  "serde_json",
 ]
@@ -8452,7 +8452,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "eca58d7bba4a75707817a2c44174253f9236b2d5fbd055602e9d5c07c139a047"
 dependencies = [
  "futures-core",
- "pin-project-lite",
+ "pin-trezoa-lite",
  "tokio",
 ]
 
@@ -8481,7 +8481,7 @@ dependencies = [
  "futures-core",
  "futures-sink",
  "log",
- "pin-project-lite",
+ "pin-trezoa-lite",
  "slab",
  "tokio",
 ]
@@ -8495,7 +8495,7 @@ dependencies = [
  "bytes",
  "futures-core",
  "futures-sink",
- "pin-project-lite",
+ "pin-trezoa-lite",
  "tokio",
 ]
 
@@ -8538,7 +8538,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "784e0ac535deb450455cbfa28a6f0df145ea1bb7ae51b821cf5e7927fdcfbdd0"
 dependencies = [
  "log",
- "pin-project-lite",
+ "pin-trezoa-lite",
  "tracing-attributes",
  "tracing-core",
 ]
